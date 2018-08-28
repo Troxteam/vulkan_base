@@ -123,6 +123,7 @@ private:
 	static std::vector<char> readFile(const std::string& filename);
 	void drawFrame();
 	static void onWindowResized(GLFWwindow* window, int width, int height);
+	static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 	VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
 	VkFormat findDepthFormat();

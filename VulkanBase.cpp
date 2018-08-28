@@ -39,6 +39,7 @@ void VulkanBase::initWindow()
 
 	glfwSetWindowUserPointer(window, this);
 	glfwSetWindowSizeCallback(window, VulkanBase::onWindowResized);
+	glfwSetKeyCallback(window, keyCallback);
 }
 
 void VulkanBase::initVulkan()
@@ -1837,6 +1838,14 @@ void VulkanBase::onWindowResized(GLFWwindow * window, int width, int height)
 
 	VulkanBase* app = reinterpret_cast<VulkanBase*>(glfwGetWindowUserPointer(window));
 	app->recreateSwapChain();
+}
+
+void VulkanBase::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, VK_TRUE);
+	}
 }
 
 uint32_t VulkanBase::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties)
