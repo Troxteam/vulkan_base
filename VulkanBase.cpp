@@ -536,9 +536,9 @@ void VulkanBase::createGraphicsPipeline()
 	rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
 	rasterizer.depthClampEnable = VK_FALSE;
 	rasterizer.rasterizerDiscardEnable = VK_FALSE;
-	rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
+	rasterizer.polygonMode = VK_POLYGON_MODE_FILL; //VK_POLYGON_MODE_LINE for wire frame, VK_POLYGON_MODE_FILL for solid
 	rasterizer.lineWidth = 1.0f;
-	rasterizer.cullMode = VK_CULL_MODE_NONE;
+	rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
 	rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
 	rasterizer.depthBiasEnable = VK_FALSE;
 	rasterizer.depthBiasConstantFactor = 0.0f;
@@ -1493,14 +1493,14 @@ void VulkanBase::loadModel()
 				vertex.color = { 1.0f, 1.0f, 1.0f };
 
 #ifdef USE_PLANE
-				//For use with cube
+				//For use with surface
 				vertex.normals = { attrib.normals[3 * index.normal_index + 0],
 									attrib.normals[3 * index.normal_index + 1],
 									attrib.normals[3 * index.normal_index + 2] };
 #else
 				//For use with chalet
 				vertex.normals = {};
-#endif // CUBE
+#endif // PLANE
 				vertex.dir = { 0.0, 0.0 };
 
 #ifdef USE_PLANE
@@ -1514,7 +1514,7 @@ void VulkanBase::loadModel()
 				}
 				staticIndices.push_back(staticIndices.size());
 				staticIndices.push_back(uniqueVertices[vertex]);
-#endif // CUBE
+#endif // PLANE
 
 		
 			}

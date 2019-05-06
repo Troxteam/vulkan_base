@@ -28,6 +28,7 @@
 //Do not remove, currently broken without
 #define USE_PLANE
 #define USE_TESSELATION
+//////////////////////////////////////////
 
 class VulkanBase
 {
